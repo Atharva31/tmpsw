@@ -1,0 +1,165 @@
+@startuml EventHub_Use_Case_Diagram
+
+skinparam actorStyle awesome
+skinparam usecase {
+    BackgroundColor #EEF5FF
+    BorderColor #3A7BD5
+    ArrowColor #333333
+    ActorBorderColor #333333
+    ActorBackgroundColor #FAFAFA
+}
+skinparam rectangle {
+    BackgroundColor #F9F9F9
+    BorderColor #AAAAAA
+}
+skinparam note {
+    BackgroundColor #FFFDE7
+    BorderColor #F9A825
+}
+
+title EventHub -- Use Case Diagram
+
+' ─── Actors ───────────────────────────────────────────────────
+actor "Guest"           as Guest
+actor "Attendee"        as Attendee
+actor "Organizer"       as Organizer
+actor "Admin"           as Admin
+
+actor "Email Service"   as EmailSvc
+actor "Google Calendar" as GCal
+actor "Maps Service"    as Maps
+actor "Payment Gateway" as Payment
+
+' Generalization
+Attendee  --|> Guest
+Organizer --|> Attendee
+Admin     --|> Attendee
+
+' ─── System Boundary ──────────────────────────────────────────
+rectangle "EventHub Platform" {
+
+    rectangle "Authentication" {
+        usecase "Register Account"          as UC_Register
+        usecase "Log In / Log Out"          as UC_Login
+        usecase "Manage Profile"            as UC_Profile
+        usecase "Role-Based Access Control" as UC_RBAC
+        usecase "JWT Authentication"        as UC_JWT
+    }
+
+    rectangle "Event Discovery" {
+        usecase "Browse Events"             as UC_Browse
+        usecase "Search Events"             as UC_Search
+        usecase "Filter by Category / Date" as UC_Filter
+        usecase "View Event Details"        as UC_Details
+    }
+
+    rectangle "Ticketing and Registration" {
+        usecase "Register / RSVP for Event" as UC_RSVP
+        usecase "Cancel Registration"       as UC_Cancel
+        usecase "Mock Payment"              as UC_Payment
+        usecase "View My Tickets"           as UC_Tickets
+    }
+
+    rectangle "Calendar and Map Integration" {
+        usecase "Add Event to Google Calendar" as UC_GCal
+        usecase "View Event on Map"            as UC_Map
+    }
+
+    rectangle "Notifications" {
+        usecase "Send Registration Confirmation" as UC_ConfirmEmail
+        usecase "Send Event Reminder"            as UC_Reminder
+        usecase "Send Update / Cancellation"     as UC_UpdateNotif
+    }
+
+    rectangle "Event Management" {
+        usecase "Create Event"           as UC_Create
+        usecase "Edit Event"             as UC_Edit
+        usecase "Cancel Event"           as UC_CancelEvt
+        usecase "Set Capacity"           as UC_Capacity
+        usecase "View Attendee List"     as UC_AttendeeList
+        usecase "Export Attendee Data"   as UC_Export
+        usecase "Track RSVP Status"      as UC_RSVPTrack
+    }
+
+    rectangle "Admin and Moderation" {
+        usecase "Review Pending Events"  as UC_Review
+        usecase "Approve / Reject Event" as UC_Approve
+        usecase "Moderate / Remove Event" as UC_Moderate
+        usecase "Manage Users"           as UC_ManageUsers
+        usecase "View Platform Analytics" as UC_Analytics
+    }
+
+    rectangle "Security" {
+        usecase "Input Validation" as UC_Validation
+        usecase "Rate Limiting"    as UC_RateLimit
+    }
+}
+
+' ─── Guest associations ───────────────────────────────────────
+Guest --> UC_Browse
+Guest --> UC_Search
+Guest --> UC_Filter
+Guest --> UC_Details
+Guest --> UC_Map
+Guest --> UC_Register
+Guest --> UC_Login
+
+' ─── Attendee associations ────────────────────────────────────
+Attendee --> UC_Profile
+Attendee --> UC_RSVP
+Attendee --> UC_Cancel
+Attendee --> UC_Tickets
+Attendee --> UC_GCal
+
+' ─── Organizer associations ───────────────────────────────────
+Organizer --> UC_Create
+Organizer --> UC_Edit
+Organizer --> UC_CancelEvt
+Organizer --> UC_Capacity
+Organizer --> UC_AttendeeList
+Organizer --> UC_Export
+Organizer --> UC_RSVPTrack
+
+' ─── Admin associations ───────────────────────────────────────
+Admin --> UC_Review
+Admin --> UC_Approve
+Admin --> UC_Moderate
+Admin --> UC_ManageUsers
+Admin --> UC_Analytics
+
+' ─── External service associations ───────────────────────────
+UC_ConfirmEmail --> EmailSvc
+UC_Reminder     --> EmailSvc
+UC_UpdateNotif  --> EmailSvc
+UC_GCal         --> GCal
+UC_Map          --> Maps
+UC_Payment      --> Payment
+
+' ─── include / extend relationships ──────────────────────────
+UC_Login    ..> UC_JWT        : <<include>>
+UC_Login    ..> UC_RBAC       : <<include>>
+UC_Register ..> UC_Validation : <<include>>
+UC_Create   ..> UC_Validation : <<include>>
+UC_RSVP     ..> UC_Validation : <<include>>
+
+UC_RSVP     ..> UC_ConfirmEmail : <<include>>
+UC_Create   ..> UC_Review       : <<include>>
+
+UC_RSVP      ..> UC_Payment     : <<extend>>
+UC_Approve   ..> UC_UpdateNotif : <<extend>>
+UC_CancelEvt ..> UC_UpdateNotif : <<extend>>
+
+note right of UC_RBAC
+  Roles enforced at API level:
+  Guest     - read-only public data
+  Attendee  - register, RSVP, profile
+  Organizer - full event lifecycle
+  Admin     - platform-wide control
+end note
+
+note bottom of UC_Approve
+  New events require Admin approval
+  before becoming publicly visible
+end note
+
+@enduml

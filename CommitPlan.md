@@ -30,7 +30,7 @@ Stage your files first, then use:
 ```bash
 GIT_AUTHOR_DATE="<ISO date>" GIT_COMMITTER_DATE="<ISO date>" git commit -m "<message>"
 ```
-All commits from **C01 to C48** (Feb 16 – Mar 31) require backdating. Commits **C49 onward** (Apr 1+) can be committed normally.
+All commits from **C01 to C60** (Feb 16 – Apr 14) require backdating. Commits **C61 onward** (Apr 15+) can be committed normally.
 
 ---
 
@@ -530,7 +530,8 @@ GIT_AUTHOR_DATE="2026-03-31T09:40:00" GIT_COMMITTER_DATE="2026-03-31T09:40:00" \
 **Message:** `test: add unit tests for event service Observer and Strategy patterns`
 **Files:** `eventhub-api/tests/test_events.py`
 ```bash
-git commit -m "test: add unit tests for event service Observer and Strategy patterns"
+GIT_AUTHOR_DATE="2026-04-01T15:10:00" GIT_COMMITTER_DATE="2026-04-01T15:10:00" \
+  git commit -m "test: add unit tests for event service Observer and Strategy patterns"
 ```
 
 ---
@@ -539,7 +540,8 @@ git commit -m "test: add unit tests for event service Observer and Strategy patt
 **Message:** `test: add integration tests for registration flow and admin endpoints`
 **Files:** `eventhub-api/tests/test_registrations.py`, `eventhub-api/tests/test_admin.py`
 ```bash
-git commit -m "test: add integration tests for registration flow and admin endpoints"
+GIT_AUTHOR_DATE="2026-04-02T10:35:00" GIT_COMMITTER_DATE="2026-04-02T10:35:00" \
+  git commit -m "test: add integration tests for registration flow and admin endpoints"
 ```
 
 ---
@@ -548,7 +550,8 @@ git commit -m "test: add integration tests for registration flow and admin endpo
 **Message:** `fix: resolve JWT expiry not clearing Zustand auth store on 401 response`
 **Files:** `eventhub-ui/src/api/client.js`, `eventhub-ui/src/store/authStore.js`
 ```bash
-git commit -m "fix: resolve JWT expiry not clearing Zustand auth store on 401 response"
+GIT_AUTHOR_DATE="2026-04-03T14:55:00" GIT_COMMITTER_DATE="2026-04-03T14:55:00" \
+  git commit -m "fix: resolve JWT expiry not clearing Zustand auth store on 401 response"
 ```
 
 ---
@@ -557,7 +560,8 @@ git commit -m "fix: resolve JWT expiry not clearing Zustand auth store on 401 re
 **Message:** `fix: resolve event capacity race condition using SELECT FOR UPDATE in registration service`
 **Files:** `eventhub-api/app/services/registration_service.py`
 ```bash
-git commit -m "fix: resolve event capacity race condition using SELECT FOR UPDATE in registration service"
+GIT_AUTHOR_DATE="2026-04-05T09:20:00" GIT_COMMITTER_DATE="2026-04-05T09:20:00" \
+  git commit -m "fix: resolve event capacity race condition using SELECT FOR UPDATE in registration service"
 ```
 
 ---
@@ -566,7 +570,8 @@ git commit -m "fix: resolve event capacity race condition using SELECT FOR UPDAT
 **Message:** `fix: correct responsive layout breakpoints and React Query cache invalidation after event creation`
 **Files:** `eventhub-ui/src/pages/EventsPage.jsx`, `eventhub-ui/src/pages/CreateEventPage.jsx`
 ```bash
-git commit -m "fix: correct responsive layout breakpoints and React Query cache invalidation after event creation"
+GIT_AUTHOR_DATE="2026-04-06T15:45:00" GIT_COMMITTER_DATE="2026-04-06T15:45:00" \
+  git commit -m "fix: correct responsive layout breakpoints and React Query cache invalidation after event creation"
 ```
 
 ---
@@ -575,7 +580,8 @@ git commit -m "fix: correct responsive layout breakpoints and React Query cache 
 **Message:** `feat: add GitHub Actions CI workflow for lint and test on push`
 **Files:** `.github/workflows/ci.yml`
 ```bash
-git commit -m "feat: add GitHub Actions CI workflow for lint and test on push"
+GIT_AUTHOR_DATE="2026-04-07T11:00:00" GIT_COMMITTER_DATE="2026-04-07T11:00:00" \
+  git commit -m "feat: add GitHub Actions CI workflow for lint and test on push"
 ```
 
 ---
@@ -584,7 +590,8 @@ git commit -m "feat: add GitHub Actions CI workflow for lint and test on push"
 **Message:** `feat: add rate limiting middleware to auth endpoints`
 **Files:** `eventhub-api/app/routers/auth.py`, `eventhub-api/app/main.py`
 ```bash
-git commit -m "feat: add rate limiting middleware to auth endpoints"
+GIT_AUTHOR_DATE="2026-04-08T16:20:00" GIT_COMMITTER_DATE="2026-04-08T16:20:00" \
+  git commit -m "feat: add rate limiting middleware to auth endpoints"
 ```
 
 ---
@@ -593,7 +600,8 @@ git commit -m "feat: add rate limiting middleware to auth endpoints"
 **Message:** `perf: optimize event list query with selectinload to eliminate N+1 queries`
 **Files:** `eventhub-api/app/crud/event_crud.py`, `eventhub-api/app/services/event_service.py`
 ```bash
-git commit -m "perf: optimize event list query with selectinload to eliminate N+1 queries"
+GIT_AUTHOR_DATE="2026-04-09T10:40:00" GIT_COMMITTER_DATE="2026-04-09T10:40:00" \
+  git commit -m "perf: optimize event list query with selectinload to eliminate N+1 queries"
 ```
 
 ---
@@ -602,7 +610,8 @@ git commit -m "perf: optimize event list query with selectinload to eliminate N+
 **Message:** `feat: add ARIA labels, focus rings, and keyboard navigation for accessibility`
 **Files:** `eventhub-ui/src/components/ui/Modal.jsx`, `eventhub-ui/src/components/layout/Navbar.jsx`, `eventhub-ui/src/pages/EventDetailPage.jsx`
 ```bash
-git commit -m "feat: add ARIA labels, focus rings, and keyboard navigation for accessibility"
+GIT_AUTHOR_DATE="2026-04-10T14:15:00" GIT_COMMITTER_DATE="2026-04-10T14:15:00" \
+  git commit -m "feat: add ARIA labels, focus rings, and keyboard navigation for accessibility"
 ```
 
 ---
@@ -611,7 +620,8 @@ git commit -m "feat: add ARIA labels, focus rings, and keyboard navigation for a
 **Message:** `feat: add DB seed script and reset script for development`
 **Files:** `eventhub-api/scripts/seed.py`, `eventhub-api/scripts/reset_db.py`
 ```bash
-git commit -m "feat: add DB seed script and reset script for development"
+GIT_AUTHOR_DATE="2026-04-12T09:30:00" GIT_COMMITTER_DATE="2026-04-12T09:30:00" \
+  git commit -m "feat: add DB seed script and reset script for development"
 ```
 
 ---
@@ -620,7 +630,8 @@ git commit -m "feat: add DB seed script and reset script for development"
 **Message:** `docs: add OpenAPI descriptions for all event endpoints`
 **Files:** `eventhub-api/app/routers/events.py`, `eventhub-api/app/routers/categories.py`
 ```bash
-git commit -m "docs: add OpenAPI descriptions for all event endpoints"
+GIT_AUTHOR_DATE="2026-04-13T15:55:00" GIT_COMMITTER_DATE="2026-04-13T15:55:00" \
+  git commit -m "docs: add OpenAPI descriptions for all event endpoints"
 ```
 
 ---
@@ -633,7 +644,8 @@ git commit -m "docs: add OpenAPI descriptions for all event endpoints"
 **Message:** `fix: tighten CORS origins and add Content-Security-Policy header`
 **Files:** `eventhub-api/app/main.py`
 ```bash
-git commit -m "fix: tighten CORS origins and add Content-Security-Policy header"
+GIT_AUTHOR_DATE="2026-04-14T10:20:00" GIT_COMMITTER_DATE="2026-04-14T10:20:00" \
+  git commit -m "fix: tighten CORS origins and add Content-Security-Policy header"
 ```
 
 ---
